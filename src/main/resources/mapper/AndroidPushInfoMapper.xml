@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.asurily.dao.AndroidPushInfoMapper">
+  <resultMap id="BaseResultMap" type="xyz.asurily.model.AndroidPushInfo">
+    <id column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="hardware" jdbcType="VARCHAR" property="hardware" />
+    <result column="sdk_int" jdbcType="INTEGER" property="sdkInt" />
+    <result column="fingerprint" jdbcType="VARCHAR" property="fingerprint" />
+    <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="base_os" jdbcType="VARCHAR" property="baseOs" />
+    <result column="meid" jdbcType="VARCHAR" property="meid" />
+    <result column="imei" jdbcType="VARCHAR" property="imei" />
+    <result column="android_id" jdbcType="VARCHAR" property="androidId" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="error_msg" jdbcType="VARCHAR" property="errorMsg" />
+    <result column="google_version" jdbcType="VARCHAR" property="googleVersion" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    uuid, address, hardware, sdk_int, fingerprint, manufacturer, base_os, meid, imei, 
+    android_id, version, channel, error_msg, google_version
+  </sql>
+  <select id="selectByExample" parameterType="xyz.asurily.model.AndroidPushInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from android_push_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from android_push_info
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from android_push_info
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="xyz.asurily.model.AndroidPushInfoExample">
+    delete from android_push_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="xyz.asurily.model.AndroidPushInfo">
+    insert into android_push_info (uuid, address, hardware, 
+      sdk_int, fingerprint, manufacturer, 
+      base_os, meid, imei, 
+      android_id, version, channel, 
+      error_msg, google_version)
+    values (#{uuid,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{hardware,jdbcType=VARCHAR}, 
+      #{sdkInt,jdbcType=INTEGER}, #{fingerprint,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
+      #{baseOs,jdbcType=VARCHAR}, #{meid,jdbcType=VARCHAR}, #{imei,jdbcType=VARCHAR}, 
+      #{androidId,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, 
+      #{errorMsg,jdbcType=VARCHAR}, #{googleVersion,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.asurily.model.AndroidPushInfo">
+    insert into android_push_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="hardware != null">
+        hardware,
+      </if>
+      <if test="sdkInt != null">
+        sdk_int,
+      </if>
+      <if test="fingerprint != null">
+        fingerprint,
+      </if>
+      <if test="manufacturer != null">
+        manufacturer,
+      </if>
+      <if test="baseOs != null">
+        base_os,
+      </if>
+      <if test="meid != null">
+        meid,
+      </if>
+      <if test="imei != null">
+        imei,
+      </if>
+      <if test="androidId != null">
+        android_id,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="errorMsg != null">
+        error_msg,
+      </if>
+      <if test="googleVersion != null">
+        google_version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="hardware != null">
+        #{hardware,jdbcType=VARCHAR},
+      </if>
+      <if test="sdkInt != null">
+        #{sdkInt,jdbcType=INTEGER},
+      </if>
+      <if test="fingerprint != null">
+        #{fingerprint,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="baseOs != null">
+        #{baseOs,jdbcType=VARCHAR},
+      </if>
+      <if test="meid != null">
+        #{meid,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null">
+        #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="androidId != null">
+        #{androidId,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMsg != null">
+        #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="googleVersion != null">
+        #{googleVersion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="xyz.asurily.model.AndroidPushInfoExample" resultType="java.lang.Long">
+    select count(*) from android_push_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update android_push_info
+    <set>
+      <if test="record.uuid != null">
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hardware != null">
+        hardware = #{record.hardware,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdkInt != null">
+        sdk_int = #{record.sdkInt,jdbcType=INTEGER},
+      </if>
+      <if test="record.fingerprint != null">
+        fingerprint = #{record.fingerprint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manufacturer != null">
+        manufacturer = #{record.manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.baseOs != null">
+        base_os = #{record.baseOs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meid != null">
+        meid = #{record.meid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imei != null">
+        imei = #{record.imei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.androidId != null">
+        android_id = #{record.androidId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channel != null">
+        channel = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorMsg != null">
+        error_msg = #{record.errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.googleVersion != null">
+        google_version = #{record.googleVersion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update android_push_info
+    set uuid = #{record.uuid,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      hardware = #{record.hardware,jdbcType=VARCHAR},
+      sdk_int = #{record.sdkInt,jdbcType=INTEGER},
+      fingerprint = #{record.fingerprint,jdbcType=VARCHAR},
+      manufacturer = #{record.manufacturer,jdbcType=VARCHAR},
+      base_os = #{record.baseOs,jdbcType=VARCHAR},
+      meid = #{record.meid,jdbcType=VARCHAR},
+      imei = #{record.imei,jdbcType=VARCHAR},
+      android_id = #{record.androidId,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      channel = #{record.channel,jdbcType=VARCHAR},
+      error_msg = #{record.errorMsg,jdbcType=VARCHAR},
+      google_version = #{record.googleVersion,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.asurily.model.AndroidPushInfo">
+    update android_push_info
+    <set>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="hardware != null">
+        hardware = #{hardware,jdbcType=VARCHAR},
+      </if>
+      <if test="sdkInt != null">
+        sdk_int = #{sdkInt,jdbcType=INTEGER},
+      </if>
+      <if test="fingerprint != null">
+        fingerprint = #{fingerprint,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null">
+        manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="baseOs != null">
+        base_os = #{baseOs,jdbcType=VARCHAR},
+      </if>
+      <if test="meid != null">
+        meid = #{meid,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null">
+        imei = #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="androidId != null">
+        android_id = #{androidId,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMsg != null">
+        error_msg = #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="googleVersion != null">
+        google_version = #{googleVersion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.asurily.model.AndroidPushInfo">
+    update android_push_info
+    set address = #{address,jdbcType=VARCHAR},
+      hardware = #{hardware,jdbcType=VARCHAR},
+      sdk_int = #{sdkInt,jdbcType=INTEGER},
+      fingerprint = #{fingerprint,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      base_os = #{baseOs,jdbcType=VARCHAR},
+      meid = #{meid,jdbcType=VARCHAR},
+      imei = #{imei,jdbcType=VARCHAR},
+      android_id = #{androidId,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      error_msg = #{errorMsg,jdbcType=VARCHAR},
+      google_version = #{googleVersion,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>
